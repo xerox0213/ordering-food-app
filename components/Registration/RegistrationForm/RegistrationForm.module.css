@@ -1,0 +1,98 @@
+.container {
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+.containerForm {
+  background-color: #f1f1f1;
+  border: 1px solid black;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btnContainer button {
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+}
+
+.btnContainer .nextBtn {
+  margin-left: auto;
+  background-color: #007bff;
+  border: 1px solid #007bff;
+}
+
+.btnContainer .prevBtn {
+  background-color: #dc3545;
+  border: 1px solid #dc3545;
+}
+
+.indicatorRegistration {
+  position: relative;
+  height: 20px;
+  background-color: white;
+  margin-bottom: 30px;
+}
+
+.point {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  top: 50%;
+}
+
+.point img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.point:nth-child(2) {
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+
+.point:nth-child(3) {
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.point:nth-child(4) {
+  right: 0;
+  transform: translate(50%, -50%);
+}
+
+.juiceBar {
+  width: 100%;
+  height: 100%;
+  background-color: #dc3545;
+  transform-origin: left;
+  transition: transform 0.5s ease-out;
+}
+
+.infoAccount {
+  margin-top: 30px;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.infoErrorRegistration {
+  background-color: crimson;
+  border-radius: 5px;
+  color: white;
+  max-width: 300px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 10px;
+  font-size: 14px;
+}
