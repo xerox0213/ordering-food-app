@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 
-const useForm = () => {
+const useRegister = () => {
   const [registrationStep, setRegistrationStep] = useState(0);
   const [errorInputs, setErrorInput] = useState([]);
   const [errorRegistration, setErrorRegistration] = useState('');
@@ -126,17 +126,27 @@ const useForm = () => {
       } else if (registrationStep < 2 && registrationStep === 1) {
         try {
           addData();
-          await fetch('/api/user_api/registration', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(registrationData.current),
-          });
+          const requestCreateUserWithDb = await fetch(
+            '/api/user_api/registration',
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(registrationData.current),
+            }
+          );
+          const responseAPI = await requestCreateUserWithDb.json();
+          if (responseAPI.code === 401) {
+            throw new Error(responseAPI.error);
+          }
           refForm.current.reset();
+          if (errorRegistration !== '') {
+            setErrorRegistration('');
+          }
           setRegistrationStep((currentStep) => currentStep + 1);
         } catch (error) {
-          console.dir(error);
+          setErrorRegistration(error.message);
         }
       } else {
         setRegistrationStep(2);
@@ -150,6 +160,9 @@ const useForm = () => {
   const prevRegistrationStep = () => {
     if (registrationStep > 0) {
       refForm.current.reset();
+      if (errorRegistration !== '') {
+        setErrorRegistration('');
+      }
       setRegistrationStep((currentStep) => currentStep - 1);
     } else {
       return;
@@ -167,4 +180,4 @@ const useForm = () => {
   ];
 };
 
-export default useForm;
+export default useRegister;

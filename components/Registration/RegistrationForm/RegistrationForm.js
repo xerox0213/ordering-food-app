@@ -1,12 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
-import useForm from '@/hooks/useForm';
+import useRegister from '@/hooks/useRegister';
 import Point1 from '@/public/assiette.png';
 import Point2 from '@/public/fast-food.png';
 import Point3 from '@/public/nourriture.png';
 import styles from './RegistrationForm.module.css';
+import ErrorForm from '@/components/ErrorForm/ErrorForm';
+import MessageForm from '@/components/MessageForm/MessageForm';
 import RegistrationInputs from '../RegistrationInputs/RegistrationInputs';
-import Link from 'next/link';
 
 // Composant composé
 const RegistrationForm = () => {
@@ -18,7 +19,7 @@ const RegistrationForm = () => {
     refForm,
     nextRegistrationStep,
     prevRegistrationStep,
-  ] = useForm();
+  ] = useRegister();
 
   // Rendu
   return (
@@ -39,11 +40,7 @@ const RegistrationForm = () => {
         </div>
       </div>
       <div className={styles.containerForm}>
-        {errorRegistration && (
-          <div className={styles.infoErrorRegistration}>
-            {errorRegistration}
-          </div>
-        )}
+        {errorRegistration && <ErrorForm error={errorRegistration} />}
         <form ref={refForm}>
           <RegistrationInputs
             registrationStep={registrationStep}
@@ -65,9 +62,7 @@ const RegistrationForm = () => {
           )}
         </div>
       </div>
-      <p className={styles.infoAccount}>
-        Déjà inscrit(e) ? <Link href={'/'}>Connectez-vous maintenant !</Link>
-      </p>
+      <MessageForm type='registration' />
     </div>
   );
 };

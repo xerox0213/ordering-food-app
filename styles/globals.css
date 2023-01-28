@@ -15,4 +15,6 @@ body {
 
 main {
   padding: .1px;
+  position: relative;
+  min-height: 100vh;
 }

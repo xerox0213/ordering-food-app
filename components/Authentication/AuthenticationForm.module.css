@@ -1,0 +1,62 @@
+.container {
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+.containerForm {
+  background-color: #f1f1f1;
+  border: 1px solid black;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.498);
+}
+
+
+.containerForm button {
+  display: block;
+  margin: 0 auto;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  background-color: #007bff;
+  border: 1px solid #007bff;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  margin-bottom: 10px;
+}
+
+.inputGroup label {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.inputGroup input {
+  display: block;
+  border: none;
+  background-color: rgb(233, 232, 232);
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid black;
+}
+
+.inputGroup input:focus {
+  outline: 2px solid #83a2ff;
+}
+
+.infoErrorInput {
+  color: crimson;
+  font-weight: 500;
+  font-size: 14px;
+  visibility: hidden;
+}
+
+.active {
+  visibility: visible;
+}
