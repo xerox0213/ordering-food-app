@@ -10,11 +10,31 @@ button {
 
 
 body {
-  background-color: #222;
+  background-color: #f7f5f5;
 }
 
 main {
   padding: .1px;
   position: relative;
   min-height: 100vh;
+  overflow: hidden;
+}
+
+.grid {
+  margin: 0 270px 0 80px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-rows: auto auto;
+  grid-auto-rows: auto;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+
+.filterContainer {
+  display: flex;
+  column-gap: 20px;
+  grid-column: 1/-1;
+  grid-row: 1/2;
 }

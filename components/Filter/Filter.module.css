@@ -1,0 +1,16 @@
+.btnFilter {
+  cursor: pointer;
+  background-color: rgb(242, 235, 235);
+  border-radius: 9999px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 5px;
+}
+
+.btnFilter:hover {
+  background-color: rgb(227, 222, 222);
+}
