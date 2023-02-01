@@ -1,0 +1,17 @@
+.btn {
+  cursor: pointer;
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.btn:hover {
+  background-color: rgb(247, 243, 243);
+}

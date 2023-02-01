@@ -7,6 +7,7 @@
 }
 
 .headerCard {
+  position: relative;
   width: 120px;
   height: 120px;
   margin: 0 auto 15px;
@@ -21,7 +22,7 @@
   object-fit: cover;
 }
 
-.cardMenu h2 {
+.cardMenu h3 {
   text-align: center;
   margin-bottom: 5px;
 }
@@ -33,29 +34,6 @@
   font-weight: 500;
 }
 
-.quantityCard {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  column-gap: 10px;
-  margin-bottom: 15px;
-}
-
-
-.quantityCard button {
-  cursor: pointer;
-  background-color: white;
-  border: 1px solid lightgray;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  font-size: 18px;
-}
-
-.quantityCard button:hover {
-  background-color: rgb(247, 243, 243);
-}
-
 .btnAddToCart {
   display: block;
   border: none;
@@ -64,8 +42,8 @@
   border-radius: 5px;
   padding: 8px 10px;
   cursor: pointer;
-  margin: 0 auto;
   font-size: 16px;
+  margin: 0 auto;
 }
 
 .btnAddToCart:hover {

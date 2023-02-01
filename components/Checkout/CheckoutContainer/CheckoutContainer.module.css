@@ -9,5 +9,19 @@
   border-radius: 10px;
   right: 20px;
   border: 1px solid lightgray;
+  overflow: hidden;
+}
+
+.checkoutContainer h1 {
+  margin-bottom: 20px;
+}
+
+.products {
   overflow-y: auto;
+}
+
+.products::-webkit-scrollbar {
+  /* WebKit */
+  width: 0;
+  height: 0;
 }

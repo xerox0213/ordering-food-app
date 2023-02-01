@@ -1,37 +1,28 @@
 import Image from 'next/image';
-import { useState } from 'react';
-import test from '@/public/test.avif';
+import { useDispatch } from 'react-redux';
 import styles from './CardMenu.module.css';
 
-const CardMenu = () => {
-  const [quantityProduct, setQuantityProduct] = useState(1);
+const CardMenu = ({ data }) => {
+  const dispatch = useDispatch();
 
-  const addQuantity = () => {
-    setQuantityProduct((current) => current + 1);
-  };
-
-  const removeQuantity = () => {
-    if (quantityProduct > 1) {
-      setQuantityProduct((current) => current - 1);
-    } else {
-      return;
-    }
+  const addToCart = () => {
+    dispatch({
+      type: 'cart/addProduct',
+      payload: { ...data },
+    });
   };
 
   return (
     <div className={styles.cardMenu}>
       <div className={styles.headerCard}>
-        <Image src={test} />
+        <Image src={data.img} fill loading='lazy' />
       </div>
       <div className='contentCard'>
-        <h2 className='titleCard'>American</h2>
-        <p className={styles.priceCard}>5.00 €</p>
-        <div className={styles.quantityCard}>
-          <button onClick={removeQuantity}>-</button>
-          <p>{quantityProduct}</p>
-          <button onClick={addQuantity}>+</button>
-        </div>
-        <button className={styles.btnAddToCart}>Ajouter au panier</button>
+        <h3 className='titleCard'>{data.name}</h3>
+        <p className={styles.priceCard}>{data.price}€</p>
+        <button className={styles.btnAddToCart} onClick={addToCart}>
+          Ajouter au panier
+        </button>
       </div>
     </div>
   );
