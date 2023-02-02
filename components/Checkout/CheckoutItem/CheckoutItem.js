@@ -1,11 +1,9 @@
 import Image from 'next/image';
+import { useDispatch } from 'react-redux';
 import styles from './CheckoutItem.module.css';
 import ContainerQttBtn from '@/components/QuantityButton/ContainerQttBtn/ContainerQttBtn';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 
 const CheckoutItem = ({ data }) => {
-  const [quantityProduct, setQuantityProduct] = useState(data.quantityProduct);
   const dispatch = useDispatch();
 
   const removeProduct = () => {
@@ -22,8 +20,8 @@ const CheckoutItem = ({ data }) => {
         <p className={styles.priceCard}>{data.price}€</p>
         <div className={styles.btnCheckoutItemContainer}>
           <ContainerQttBtn
-            setQuantityProduct={setQuantityProduct}
-            quantityProduct={quantityProduct}
+            quantityProduct={data.quantityProduct}
+            idProduct={data.id}
           />
           <button onClick={removeProduct} className={styles.deleteItem}>
             X

@@ -13,10 +13,15 @@ const cartSlice = createSlice({
       }
     },
     removeProduct: (state, action) => {
-      const idOfProduct = action.payload.id;
+      const idOfProduct = action.payload;
       return state.filter((elem) => elem.id !== idOfProduct);
     },
-    modifyQuantityOfProduct: (state, action) => {},
+    modifyQuantityOfProduct: (state, action) => {
+      const { idProduct, quantityProduct } = action.payload;
+      const indexProduct = state.findIndex((elem) => elem.id === idProduct);
+      state[indexProduct].quantityProduct = quantityProduct;
+      return state;
+    },
   },
 });
 

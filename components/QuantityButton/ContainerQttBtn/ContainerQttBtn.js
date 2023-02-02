@@ -1,19 +1,19 @@
 import QttBtn from '../QttBtn/QttBtn';
 import styles from './ContainerQttBtn.module.css';
 
-const ContainerQttBtn = ({ setQuantityProduct, quantityProduct }) => {
+const ContainerQttBtn = ({ quantityProduct, idProduct }) => {
   return (
     <div className={styles.quantityBtnContainer}>
       <QttBtn
         type='remove'
-        setQuantityProduct={setQuantityProduct}
         quantityProduct={quantityProduct}
+        idProduct={idProduct}
       />
       <p>{quantityProduct}</p>
       <QttBtn
         type='add'
-        setQuantityProduct={setQuantityProduct}
         quantityProduct={quantityProduct}
+        idProduct={idProduct}
       />
     </div>
   );

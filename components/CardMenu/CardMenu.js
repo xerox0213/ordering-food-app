@@ -8,7 +8,7 @@ const CardMenu = ({ data }) => {
   const addToCart = () => {
     dispatch({
       type: 'cart/addProduct',
-      payload: { ...data },
+      payload: { ...data, quantityProduct: 1 },
     });
   };
 
@@ -17,8 +17,11 @@ const CardMenu = ({ data }) => {
       <div className={styles.headerCard}>
         <Image src={data.img} fill loading='lazy' />
       </div>
-      <div className='contentCard'>
-        <h3 className='titleCard'>{data.name}</h3>
+      <div className={styles.contentCard}>
+        <h3>{data.name}</h3>
+      </div>
+
+      <div className={styles.footerCard}>
         <p className={styles.priceCard}>{data.price}€</p>
         <button className={styles.btnAddToCart} onClick={addToCart}>
           Ajouter au panier

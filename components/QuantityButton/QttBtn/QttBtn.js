@@ -1,9 +1,17 @@
 import styles from './QttBtn.module.css';
+import { useDispatch } from 'react-redux';
 
-const QttBtn = ({ type, setQuantityProduct, quantityProduct }) => {
+const QttBtn = ({ type, quantityProduct, idProduct }) => {
+  const dispatch = useDispatch();
   if (type === 'add') {
     const addQuantity = () => {
-      setQuantityProduct(quantityProduct + 1);
+      dispatch({
+        type: 'cart/modifyQuantityOfProduct',
+        payload: {
+          idProduct,
+          quantityProduct: quantityProduct + 1,
+        },
+      });
     };
     return (
       <button className={styles.btn} onClick={addQuantity}>
@@ -13,7 +21,13 @@ const QttBtn = ({ type, setQuantityProduct, quantityProduct }) => {
   } else {
     const removeQuantity = () => {
       if (quantityProduct > 1) {
-        setQuantityProduct((current) => current - 1);
+        dispatch({
+          type: 'cart/modifyQuantityOfProduct',
+          payload: {
+            idProduct,
+            quantityProduct: quantityProduct - 1,
+          },
+        });
       } else {
         return;
       }

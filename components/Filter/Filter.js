@@ -1,11 +1,9 @@
 import styles from './Filter.module.css';
-import Sushi from '@/public/sushi.png';
 import Image from 'next/image';
-
-const Filter = ({ text }) => {
+const Filter = ({ text, type }) => {
   return (
     <button className={styles.btnFilter}>
-      <Image src={Sushi} />
+      <Image src={`/icon_filter/${type}.png`} width={16} height={16} />
       {text}
     </button>
   );

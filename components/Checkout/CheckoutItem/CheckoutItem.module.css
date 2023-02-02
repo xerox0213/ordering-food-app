@@ -4,7 +4,9 @@
 }
 
 .cartItem:not(.cartItem:last-child) {
-  margin-bottom: 25px;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid lightgray;
 }
 
 .headerCartItem {

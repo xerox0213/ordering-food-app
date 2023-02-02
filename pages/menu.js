@@ -9,13 +9,13 @@ const Menu = ({ foodData }) => {
     <>
       <div className='grid'>
         <div className='filterContainer'>
-          <Filter text='Pizza' />
-          <Filter text='Burger' />
-          <Filter text='Sushi' />
-          <Filter text='Boissons' />
+          <Filter text='Burger' type='burger' />
+          <Filter text='Pizza' type='pizza' />
+          <Filter text='Sandwiches' type='sandwich' />
+          <Filter text='Dessert' type='cake' />
         </div>
         {foodData.map((data) => (
-          <CardMenu data={data} />
+          <CardMenu key={data.id} data={data} />
         ))}
       </div>
       <CheckoutContainer />

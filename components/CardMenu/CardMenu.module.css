@@ -1,4 +1,6 @@
 .cardMenu {
+  display: flex;
+  flex-direction: column;
   border: 1px solid lightgray;
   border-radius: 10px;
   padding: 20px;
@@ -22,7 +24,7 @@
   object-fit: cover;
 }
 
-.cardMenu h3 {
+.contentCard h3 {
   text-align: center;
   margin-bottom: 5px;
 }
@@ -48,4 +50,8 @@
 
 .btnAddToCart:hover {
   background-color: rgb(79, 199, 79);
+}
+
+.footerCard {
+  margin-top: auto;
 }

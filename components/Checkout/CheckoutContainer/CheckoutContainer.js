@@ -15,10 +15,10 @@ const CheckoutContainer = () => {
         <>
           <div className={styles.products}>
             {products.map((data) => (
-              <CheckoutItem data={data} />
+              <CheckoutItem key={data.id} data={data} />
             ))}
           </div>
-          <CalculatorPrice />
+          <CalculatorPrice products={products} />
         </>
       )}
     </div>
