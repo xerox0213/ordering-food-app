@@ -39,3 +39,16 @@ main {
   grid-column: 1/-1;
   grid-row: 1/2;
 }
+
+.loader {
+  grid-column: 1/-1;
+  grid-row: 1/-1;
+  text-align: center;
+}
+
+
+@media screen and (max-width:820px) {
+  .grid {
+    margin: 0 270px 60px 0;
+  }
+}

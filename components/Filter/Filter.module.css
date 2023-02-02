@@ -9,8 +9,13 @@
   align-items: center;
   justify-content: center;
   column-gap: 5px;
+  font-weight: 500;
 }
 
 .btnFilter:hover {
-  background-color: rgb(227, 222, 222);
+  background-color: rgb(203, 200, 200);
+}
+
+.active {
+  background-color: rgb(203, 200, 200);
 }

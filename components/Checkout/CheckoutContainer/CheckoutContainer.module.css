@@ -27,3 +27,9 @@
   width: 0;
   height: 0;
 }
+
+@media screen and (max-width:820px) {
+  .checkoutContainer {
+    bottom: 80px;
+  }
+}
