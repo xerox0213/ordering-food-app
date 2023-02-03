@@ -18,15 +18,15 @@ const CheckoutItem = ({ data }) => {
       <div className={styles.contentCartItem}>
         <h4>{data.name}</h4>
         <p className={styles.priceCard}>{data.price}€</p>
-        <div className={styles.btnCheckoutItemContainer}>
-          <ContainerQttBtn
-            quantityProduct={data.quantityProduct}
-            idProduct={data.id}
-          />
-          <button onClick={removeProduct} className={styles.deleteItem}>
-            X
-          </button>
-        </div>
+      </div>
+      <div className={styles.btnCheckoutItemContainer}>
+        <ContainerQttBtn
+          quantityProduct={data.quantityProduct}
+          idProduct={data.id}
+        />
+        <button onClick={removeProduct} className={styles.deleteItem}>
+          X
+        </button>
       </div>
     </div>
   );

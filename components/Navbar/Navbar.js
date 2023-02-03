@@ -19,7 +19,7 @@ const Navbar = () => {
       </Link>
       <Link
         className={asPath.includes('/order') ? styles.active : undefined}
-        href='/order'
+        href='/orders'
       >
         <FiPackage />
         Orders

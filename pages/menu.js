@@ -6,7 +6,6 @@ const Menu = () => {
   return (
     <>
       <CardMenuContainer />
-      <CheckoutContainer />
     </>
   );
 };
