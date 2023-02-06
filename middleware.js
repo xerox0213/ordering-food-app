@@ -3,7 +3,6 @@ import { NextResponse } from 'next/server';
 export function middleware(req) {
   const whereIamGoing = req.nextUrl.clone().pathname;
   const isCookieExisted = req.cookies.has('token');
-  console.log('changement de page');
   if (
     isCookieExisted &&
     (whereIamGoing === '/profile' || whereIamGoing === '/orders')
@@ -21,7 +20,6 @@ export function middleware(req) {
   ) {
     return NextResponse.next();
   } else {
-    console.log('ici');
     const menuURL = new URL('/menu', req.url);
     return NextResponse.redirect(menuURL);
   }
