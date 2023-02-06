@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 const Profile = () => {
   const { data, isFetching } = useQuery({
     queryKey: ['userData'],
-    queryFn: () => fetch('/api/user_api/getDataUser').then((res) => res.json()),
+    queryFn: () => fetch('/api/profile_api').then((res) => res.json()),
   });
 
   if (isFetching) {

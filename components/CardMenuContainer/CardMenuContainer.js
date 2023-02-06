@@ -8,7 +8,7 @@ const CardMenuContainer = () => {
   const { data, isFetching } = useQuery({
     queryKey: [search],
     queryFn: () =>
-      fetch(`/api/getData?type=${search}`).then((res) => res.json()),
+      fetch(`/api/food_api?type=${search}`).then((res) => res.json()),
   });
 
   if (isFetching) {

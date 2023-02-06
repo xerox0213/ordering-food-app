@@ -1,6 +1,6 @@
 import { auth, db } from '@/firebase-config';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { setDoc, doc } from 'firebase/firestore';
+import { setDoc, doc, addDoc, collection } from 'firebase/firestore';
 
 export default async function handler(req, res) {
   try {
@@ -19,6 +19,11 @@ export default async function handler(req, res) {
       address,
       city,
       zip,
+    });
+
+    await addDoc(collection(db, 'orders'), {
+      uid: uid,
+      orders: [],
     });
     res.status(200).json({ code: 200 });
   } catch (error) {

@@ -1,6 +1,6 @@
 import styles from './CalculatorPrice.module.css';
 
-const CalculatorPrice = ({ products }) => {
+const CalculatorPrice = ({ products, redirectToCheckout }) => {
   return (
     <div className={styles.calculatorPrice}>
       <div className={styles.infoContainer}>
@@ -20,7 +20,9 @@ const CalculatorPrice = ({ products }) => {
           €
         </p>
       </div>
-      <button className={styles.btn}>Passez commande</button>
+      <button onClick={redirectToCheckout} className={styles.btn}>
+        Passez commande
+      </button>
     </div>
   );
 };
