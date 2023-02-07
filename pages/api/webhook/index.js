@@ -1,11 +1,18 @@
+// Un Webhook permet à une application tierce de nous prévenir lorsqu'un évènement a été effectué dans l'environnement DE L'APPLICATION TIERCE. Grâce à cet alerte, de notre côté (côté serveur) on pourra exécuter du code comme l'envoi d'un email ...
+
+// C'est avec cet API endpoint que Stripe va donc pouvoir communiquer
+
 import Stripe from 'stripe';
-// Va nous permettre de récupérer les données brut de requête http
+
+// Permet de récupérer le contenu brut de la requête
+// Stripe a besoin du contenu brut de la requête pour procéder à la vérification de la signature.
 import { buffer } from 'micro';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // Va nous permettre de dire à Next JS de ne pas analyser le body de la requête car on a besoin des données brut de ce body. C'est très important car on doit vérifier que le webhook event (checkout.session.completed = paiement effectué) a bien été envoyé par stripe et pas par quelqu'un d'autre. Sinon bah le gars il recoit des truc gratos
 
+// Next JS par défaut manipule le contenu brut, on l'en empêche grâce à cet objet config pour que Stripe puisse bien avoir accès au contenu brut de la requête lors de la vérification de la signature
 export const config = {
   api: {
     bodyParser: false,
@@ -15,17 +22,18 @@ export const config = {
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     let event;
-    // 1. Récupérer l'event en vérifiant la signature à l'aide du body brut de la requête et de notre clé secrète
+    // === 1. Récupérer l'event en vérifiant la signature à l'aide du contenu brut de la requête et de notre clé secrète ===
     const rawBody = await buffer(req);
     // On récupère la signature apd des en têtes de la requête
     const signature = req.headers['stripe-signature'];
+    // Vérification de la signature
     event = stripe.webhooks.constructEvent(
       rawBody.toString(),
       signature,
       process.env.STRIPE_WEBHOOK_SECRET
     );
 
-    // Syccessfully constructed event
+    // Evènement construit avec succès
     console.log('success', event.id);
 
     // 2. On vérifie que le type d'évènement est celui que nous surveillons

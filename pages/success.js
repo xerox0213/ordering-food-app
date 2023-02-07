@@ -7,3 +7,5 @@ const Success = () => {
 
   return <h1>ACHAT EFFECTUER</h1>;
 };
+
+export default Success;
