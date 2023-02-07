@@ -3,7 +3,16 @@
 // C'est avec cet API endpoint que Stripe va donc pouvoir communiquer
 
 import Stripe from 'stripe';
-
+import { db } from '@/firebase-config';
+import {
+  updateDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+  limit,
+  arrayUnion,
+} from 'firebase/firestore';
 // Permet de récupérer le contenu brut de la requête
 // Stripe a besoin du contenu brut de la requête pour procéder à la vérification de la signature.
 import { buffer } from 'micro';
@@ -22,31 +31,56 @@ export const config = {
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     let event;
-    // === 1. Récupérer l'event en vérifiant la signature à l'aide du contenu brut de la requête et de notre clé secrète ===
-    const rawBody = await buffer(req);
-    // On récupère la signature apd des en têtes de la requête
-    const signature = req.headers['stripe-signature'];
-    // Vérification de la signature
-    event = stripe.webhooks.constructEvent(
-      rawBody.toString(),
-      signature,
-      process.env.STRIPE_WEBHOOK_SECRET
-    );
-
-    // Evènement construit avec succès
-    console.log('success', event.id);
-
-    // 2. On vérifie que le type d'évènement est celui que nous surveillons
-    if (event.type === 'checkout.sesssion.completed') {
-      // Logique de l'on veut mettre en place : envoie email ...
-      console.log('Paiement réussi bien ouej');
-    } else {
-      console.warn('On connais pas cet event');
-    }
-
-    // 3. Renvoie une réponse à stripe pour dire qu'on a bien reçu l'évènement
-    res.json({ received: true });
     try {
+      // === 1. Récupérer l'event en vérifiant la signature à l'aide du contenu brut de la requête et de notre clé secrète ===
+      const rawBody = await buffer(req);
+      // On récupère la signature apd des en têtes de la requête
+      const signature = req.headers['stripe-signature'];
+      // Vérification de la signature
+      event = stripe.webhooks.constructEvent(
+        rawBody.toString(),
+        signature,
+        'whsec_c86af51f3ba5dcb0d35cd3d49671f0fa36a4df6b525bb6e32549559607b31089'
+      );
+
+      // Evènement construit avec succès
+      console.log('success', event.id);
+
+      // 2. On vérifie que le type d'évènement est celui que nous surveillons
+      if (event.type === 'checkout.session.completed') {
+        // Logique de l'on veut mettre en place : envoie email ...
+        const moreInfo = await stripe.checkout.sessions.retrieve(
+          event.data.object.id,
+          {
+            expand: ['line_items'],
+          }
+        );
+        // console.log("plus d'infos", moreInfo.line_items.data);
+        const customerDetails = event.data.object.customer_details;
+        const customerEmail = customerDetails.email;
+        const obj = {
+          date_order: getCurrentDate(),
+          firstname: 'Nasreddine',
+          items: moreInfo.line_items.data.map((item) => {
+            return {
+              name_item: item.description,
+              quantity_item: item.quantity,
+              price_item: item.amount_total,
+            };
+          }),
+          total_order: event.data.object.amount_subtotal,
+          subtotal_order: event.data.object.amount_subtotal,
+          deliveryCharges_order: 0,
+          sale_order: 0,
+        };
+        const { statusCode } = await addAnOrder(customerEmail, obj);
+        console.log('Ajout réussi', statusCode);
+      } else {
+        console.warn('On connais pas cet event');
+      }
+
+      // 3. Renvoie une réponse à stripe pour dire qu'on a bien reçu l'évènement
+      res.json({ received: true });
     } catch (error) {
       console.log(`Error message : ${error.message}`);
       res.status(400).send(`Webhook Error : ${error.message}`);
@@ -56,4 +90,51 @@ export default async function handler(req, res) {
     res.setHeader('Allow', 'POST');
     res.status(405).end('Method Not Allowed');
   }
+}
+
+async function getUID(customerEmail) {
+  const q = query(
+    collection(db, 'user'),
+    where('email', '==', customerEmail, limit(1))
+  );
+  const querySnapshot = await getDocs(q);
+  let idOfDoc;
+  querySnapshot.forEach((doc) => {
+    idOfDoc = doc.id;
+  });
+  return idOfDoc;
+}
+
+async function addAnOrder(customerEmail, obj) {
+  const idOfDoc = await getUID(customerEmail);
+  const q = query(
+    collection(db, 'orders'),
+    where('uid', '==', idOfDoc, limit(1))
+  );
+  const querySnapshot = await getDocs(q);
+  let orderRef;
+  querySnapshot.forEach((doc) => {
+    orderRef = doc.ref;
+  });
+  await updateDoc(orderRef, {
+    orders: arrayUnion(obj),
+  });
+  return { statusCode: 500 };
+}
+
+function getCurrentDate() {
+  const date = new Date();
+  const locales = 'fr-FR';
+  const options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  };
+  let newDate = date.toLocaleDateString(locales, options);
+  newDate = newDate.split(' ');
+  newDate[0] = newDate[0].slice(0, 3) + '.';
+  newDate[2] = newDate[2].slice(0, 3) + '.';
+  newDate = newDate.join(' ');
+  return newDate;
 }

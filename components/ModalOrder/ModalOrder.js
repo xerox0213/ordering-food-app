@@ -1,20 +1,71 @@
 import styles from './MordalOrder.module.css';
-
-const ModalOrder = ({ setVisibilityModal }) => {
+import { IoMdClose } from 'react-icons/io';
+const ModalOrder = ({
+  setVisibilityModal,
+  currentOrderData,
+  setCurrentOrderData,
+}) => {
+  console.log(currentOrderData);
   return (
     <div className={styles.modalContainer}>
       <div
-        onClick={() => setVisibilityModal(false)}
+        onClick={() => {
+          setCurrentOrderData(null);
+          setVisibilityModal(false);
+        }}
         className={styles.bgModal}
       ></div>
-      <div className={styles.contentModal}>
-        <h2>Détails de votre commande :</h2>
-        <p>Numéro de la commande : #145874</p>
-        <p>Prix de la commande : 85€</p>
-        <p>Adresse de livraison :</p>
-        <p>Tructructruc 787</p>
-        <p>74585</p>
-        <p>Paris</p>
+      <div className={styles.modal}>
+        <button
+          onClick={() => {
+            setCurrentOrderData(null);
+            setVisibilityModal(false);
+          }}
+          className={styles.closeBtnModal}
+        >
+          <IoMdClose />
+        </button>
+        <div className={styles.header}>
+          <p>{currentOrderData.date_order}</p>
+          <h2>Merci d'avoir passé commande, {currentOrderData.firstname}</h2>
+        </div>
+        <div className={styles.contentModal}>
+          <div className={styles.section}>
+            <h3>
+              <span>Total</span>
+              <span>{currentOrderData.total_order / 100} €</span>
+            </h3>
+          </div>
+          <div className={styles.section}>
+            {currentOrderData.items.map((item) => {
+              return (
+                <p>
+                  <span>
+                    <span className={styles.qtt}>{item.quantity_item}</span>{' '}
+                    <span>{item.name_item}</span>
+                  </span>{' '}
+                  <span>{item.price_item / 100} €</span>
+                </p>
+              );
+            })}
+          </div>
+          <div className={styles.section}>
+            <p>
+              <span className={styles.boldSpan}>Sous-total</span>
+              <span>{currentOrderData.subtotal_order / 100} €</span>
+            </p>
+            <p>
+              <span>Frais de livraison</span>{' '}
+              <span>{currentOrderData.deliveryCharges_order / 100} €</span>
+            </p>
+            <p>
+              <span>Promotion</span>{' '}
+              <span className={styles.lightSpan}>
+                {currentOrderData.sale_order / 100} €
+              </span>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

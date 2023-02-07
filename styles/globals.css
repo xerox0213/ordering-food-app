@@ -77,4 +77,8 @@ main {
   .grid {
     margin: 0 0 60px 0;
   }
+
+  .sectionWithoutCheckout {
+    margin-left: 0;
+  }
 }

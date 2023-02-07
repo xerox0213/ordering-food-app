@@ -1,10 +1,8 @@
-.contentModal {
+.modal {
   position: relative;
   background-color: white;
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 10px 20px;
-  min-width: 600px;
+  max-width: 500px;
+  margin: 0 20px;
 }
 
 .bgModal {
@@ -25,4 +23,77 @@
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+.header {
+  background-color: rgb(173, 237, 173);
+  padding: 30px 20px;
+}
+
+.header h2 {
+  font-weight: 500;
+  font-size: 26px;
+  margin-top: 5px;
+}
+
+.contentModal {
+  padding: 0 20px;
+}
+
+.section {
+  padding: 20px 0;
+}
+
+.section:not(:last-child) {
+  border-bottom: 1px solid lightgray;
+}
+
+.section>*:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.section h3,
+.section p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section h3 {
+  font-size: 24px;
+}
+
+.boldSpan {
+  font-weight: 700;
+}
+
+.lightSpan {
+  font-weight: 300;
+}
+
+.closeBtnModal {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: crimson;
+  background-color: white;
+  border: 1px solid gray;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.qtt {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  background-color: white;
+  border: 1px solid lightgray;
 }

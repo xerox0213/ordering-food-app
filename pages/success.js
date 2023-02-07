@@ -2,8 +2,13 @@ import { useRouter } from 'next/router';
 
 const Success = () => {
   const router = useRouter();
-  const { session_ID } = router.query;
-  return <h1>ACHAT EFFECTUER {session_ID}</h1>;
+  const { session_id } = router.query;
+  console.log(router.query);
+  return (
+    <div className='sectionWithoutCheckout'>
+      <h1>ACHAT EFFECTUE</h1>
+    </div>
+  );
 };
 
 export default Success;

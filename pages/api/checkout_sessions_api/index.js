@@ -1,5 +1,7 @@
-// API endpoint permettant de créer une <<checkout session stripe>>
+// API endpoint permettant de créer une checkout session stripe
 
+import { db } from '@/firebase-config';
+import { getDoc, doc } from 'firebase/firestore';
 import Stripe from 'stripe';
 // On instancie un objet nous permettant de créer notre checkout session
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
@@ -13,10 +15,14 @@ export default async function handler(req, res) {
       if (!uid) {
         throw new Error("L'utilisateur n'est pas connecté");
       }
+      // On récupère l'email de l'utilisateur
+      const email = await getEmailOfUser(uid);
       // Créer une session Checkout Stripe
       const session = await stripe.checkout.sessions.create({
         // Mode de paiement
         mode: 'payment',
+        // Email utilisé
+        customer_email: email,
         // Type de paiement
         payment_method_types: ['card'],
         // Elements que le client souhaite acheter
@@ -38,5 +44,16 @@ export default async function handler(req, res) {
   } else {
     res.setHeader('Allow', 'POST');
     res.status(405).end('Method Not Allowed');
+  }
+}
+
+async function getEmailOfUser(uid) {
+  const docRef = doc(db, 'user', uid);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    const email = docSnap.data().email;
+    return email;
+  } else {
+    return 'nada';
   }
 }
