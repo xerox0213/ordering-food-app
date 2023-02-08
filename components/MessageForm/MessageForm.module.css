@@ -1,9 +1,15 @@
 .infoAccount {
   margin-top: 30px;
   padding: 10px;
-  background-color: #f1f1f1;
+  background-color: white;
   border-radius: 10px;
   text-align: center;
-  border: 1px solid black;
+  border: 1px solid lightgray;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.498);
+  font-weight: 500;
+}
+
+.infoAccount a {
+  color: rgb(126, 56, 192);
+  font-weight: 700;
 }

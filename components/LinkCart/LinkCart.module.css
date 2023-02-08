@@ -1,0 +1,20 @@
+.cartLink {
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  z-index: 1000;
+  display: flex;
+  align-items: baseline;
+  column-gap: 5px;
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+}
+
+.cartLink:hover {
+  color: gray;
+}
+
+.qttCartLink {
+  font-size: 14px;
+}

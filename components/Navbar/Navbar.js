@@ -5,9 +5,11 @@ import { CgProfile } from 'react-icons/cg';
 import { FiPackage } from 'react-icons/fi';
 import { MdOutlineLogout } from 'react-icons/md';
 import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
 
 const Navbar = () => {
-  const { asPath } = useRouter();
+  const { asPath, push } = useRouter();
+  const dispatch = useDispatch();
   return (
     <nav className={styles.navbar}>
       <Link
@@ -31,10 +33,18 @@ const Navbar = () => {
         <CgProfile />
         Profil
       </Link>
-      <Link href='/'>
+
+      <button
+        onClick={async () => {
+          await fetch('/api/user_api/log-out', { method: 'POST' });
+          dispatch({ type: 'info/addMessage', payload: 'Déconnecté ❌' });
+          dispatch({ type: 'cart/clearCart', payload: [] });
+          push('/sign-in');
+        }}
+      >
         <MdOutlineLogout />
         Log Out
-      </Link>
+      </button>
     </nav>
   );
 };

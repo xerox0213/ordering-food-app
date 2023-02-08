@@ -12,7 +12,14 @@
   position: fixed;
 }
 
-.navbar a {
+.navbar button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.navbar a,
+.navbar button {
   display: flex;
   flex-direction: column;
   justify-content: center;

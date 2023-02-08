@@ -1,4 +1,4 @@
-// Page CSR -> pas besoin d'être optimisé SEO
+import Loader from '@/components/Loader/Loader';
 import { useQuery } from '@tanstack/react-query';
 
 const Profile = () => {
@@ -9,29 +9,36 @@ const Profile = () => {
 
   if (isFetching) {
     return (
-      <div className='sectionWithoutCheckout'>
-        <h1>Loading ...</h1>
+      <div className='section'>
+        <Loader />
       </div>
     );
   }
 
   return (
     <>
-      <div className='sectionWithoutCheckout'>
-        <h1>Mes informations</h1>
-        <p>Vous pouvez voir et mettre à jour vos informations.</p>
-        <h4>Prénom :</h4>
-        <p>{data.firstname}</p>
-        <h4>Nom :</h4>
-        <p>{data.name}</p>
-        <h4>E-mail :</h4>
-        <p>{data.email}</p>
-        <h4>Adresse :</h4>
-        <p>{data.address}</p>
-        <h4>Ville :</h4>
-        <p>{data.city}</p>
-        <h4>Code postal :</h4>
-        <p>{data.zip}</p>
+      <div className='section'>
+        <h1>Vos informations :</h1>
+        <div className='group'>
+          <h4>Prénom</h4>
+          <p>{data.firstname}</p>
+        </div>
+        <div className='group'>
+          <h4>Nom</h4>
+          <p>{data.name}</p>
+        </div>
+        <div className='group'>
+          <h4>E-mail</h4>
+          <p>{data.email}</p>
+        </div>
+        <div className='group'>
+          <h4>Ville</h4>
+          <p>{data.city}</p>
+        </div>
+        <div className='group'>
+          <h4>Code postale</h4>
+          <p>{data.zip}</p>
+        </div>
       </div>
     </>
   );

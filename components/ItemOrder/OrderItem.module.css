@@ -1,0 +1,31 @@
+.orderItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  border: 1px solid lightgray;
+  padding: 10px 15px;
+  max-width: 500px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.211);
+}
+
+.orderItem:not(.orderItem:last-child) {
+  margin-bottom: 20px;
+}
+
+.orderItem button {
+  text-decoration: underline;
+  color: black;
+  background: none;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.orderItem p {
+  font-weight: 500;
+}

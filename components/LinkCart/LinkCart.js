@@ -1,13 +1,14 @@
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { BsFillCartFill } from 'react-icons/bs';
+import styles from './LinkCart.module.css';
 
-const IconCart = () => {
+const LinkCart = () => {
   const products = useSelector((state) => state.cart);
   return (
-    <Link className='cartLink' href={'/cart'}>
+    <Link className={styles.cartLink} href={'/cart'}>
       <BsFillCartFill />
-      <span className='qttCartLink'>
+      <span className={styles.qttCartLink}>
         {'('}
         {products.length === 0
           ? 0
@@ -18,4 +19,4 @@ const IconCart = () => {
   );
 };
 
-export default IconCart;
+export default LinkCart;

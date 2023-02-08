@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import Filter from '../Filter/Filter';
+import Loader from '../Loader/Loader';
 import CardMenu from '../CardMenu/CardMenu';
 import { useQuery } from '@tanstack/react-query';
+import styles from './CardMenuContainer.module.css';
 
 const CardMenuContainer = () => {
   const [search, setSearch] = useState('allFoods');
@@ -14,15 +16,15 @@ const CardMenuContainer = () => {
   if (isFetching) {
     return (
       <div className='grid'>
-        <p className='loader'>Loading ...</p>
+        <Loader />
       </div>
     );
   }
 
   const foodData = data;
   return (
-    <div className='grid'>
-      <div className='filterContainer'>
+    <div className={styles.grid}>
+      <div className={styles.filterContainer}>
         <Filter
           text='Tout'
           type='allFoods'

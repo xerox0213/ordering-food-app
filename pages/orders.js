@@ -1,7 +1,8 @@
-import ModalOrder from '@/components/ModalOrder/ModalOrder';
-import OrderItem from '@/components/OrderItem/OrderItem';
 import { useState } from 'react';
+import Loader from '@/components/Loader/Loader';
 import { useQuery } from '@tanstack/react-query';
+import OrderItem from '@/components/ItemOrder/ItemOrder';
+import ModalOrder from '@/components/ModalOrder/ModalOrder';
 
 const Orders = () => {
   const [visibiliyModal, setVisibilityModal] = useState(false);
@@ -13,19 +14,19 @@ const Orders = () => {
 
   if (isFetching) {
     return (
-      <div className='sectionWithoutCheckout'>
-        <h1>Loading ...</h1>
+      <div className='section'>
+        <Loader />
       </div>
     );
   }
   return (
-    <div className='sectionWithoutCheckout'>
+    <div className='section'>
       {data.length === 0 ? (
-        <h1>Vous n'avez encore jamais fait de commande</h1>
+        <h1>Vous n'avez encore jamais passé de commande pour le moment</h1>
       ) : (
         <>
-          <h1>Vos commandes</h1>
-          <div className='ordersContainer'>
+          <h1>Mes commandes :</h1>
+          <div>
             {data.map((orderData) => {
               return (
                 <OrderItem

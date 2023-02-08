@@ -26,12 +26,7 @@ export default async function handler(req, res) {
         // Type de paiement
         payment_method_types: ['card'],
         // Elements que le client souhaite acheter
-        line_items: [
-          {
-            price: 'price_1MXQd3Hvv7F5Pvoc4Y5oDYvF',
-            quantity: 1,
-          },
-        ],
+        line_items: req.body,
         // Lien vers lequel le client sera redirigé si le paiement est réussi
         success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
         // Lien vers lequel le client sera redirigé si le paiement a été annulé

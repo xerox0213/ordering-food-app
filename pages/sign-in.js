@@ -1,5 +1,5 @@
-import AuthenticationForm from '@/components/Authentication/AuthenticationForm';
 import Background from '@/components/Background/Background';
+import AuthenticationForm from '@/components/Authentication/AuthenticationForm';
 
 const SignIn = () => {
   return (

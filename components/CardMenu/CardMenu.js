@@ -7,6 +7,10 @@ const CardMenu = ({ data }) => {
 
   const addToCart = () => {
     dispatch({
+      type: 'info/addMessage',
+      payload: 'Ajouté au panier 🛒',
+    });
+    dispatch({
       type: 'cart/addProduct',
       payload: { ...data, quantityProduct: 1 },
     });

@@ -10,9 +10,14 @@ const CheckoutContainer = () => {
   const router = useRouter();
   const redirectToCheckout = async () => {
     try {
+      const line_items = products.map((item) => {
+        return { price: item.id, quantity: item.quantityProduct };
+      });
       // Créer un checkout session
       const request = await fetch('/api/checkout_sessions_api', {
         method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(line_items),
       });
       const data = await request.json();
       if (data.statusCode === 500) {
@@ -26,6 +31,9 @@ const CheckoutContainer = () => {
     } catch (error) {
       if (error.message === "L'utilisateur n'est pas connecté") {
         router.push('/sign-in');
+      } else {
+        console.log('Erreur au checkout', error);
+        return;
       }
     }
   };

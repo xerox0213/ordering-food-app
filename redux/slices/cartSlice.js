@@ -24,6 +24,10 @@ const cartSlice = createSlice({
       state[indexProduct].quantityProduct = quantityProduct;
       return state;
     },
+    clearCart: (state, action) => {
+      state = action.payload;
+      return state;
+    },
   },
 });
 

@@ -1,9 +1,13 @@
+import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 const useSignIn = () => {
   // Etat
   const [errorAuthentication, setErrorAuthentication] = useState('');
   const [errorEmail, setErrorEmail] = useState(false);
+  const dispatch = useDispatch();
+  const { push } = useRouter();
   // Interaction
 
   const handleSubmit = async (e) => {
@@ -32,6 +36,8 @@ const useSignIn = () => {
       }
       setErrorEmail('');
       setErrorAuthentication('');
+      push('/menu');
+      dispatch({ type: 'info/addMessage', payload: 'Connecté ✔️' });
     } catch (error) {
       setErrorAuthentication(error.message);
     }

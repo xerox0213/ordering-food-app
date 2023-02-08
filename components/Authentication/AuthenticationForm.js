@@ -9,6 +9,7 @@ const AuthenticationForm = () => {
   return (
     <div className={styles.container}>
       <div className={styles.containerForm}>
+        <h1>Connectez-vous :</h1>
         {errorAuthentication && <ErrorForm error={errorAuthentication} />}
         <form onSubmit={handleSubmit}>
           <div className={styles.inputGroup}>
