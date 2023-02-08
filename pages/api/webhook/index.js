@@ -40,7 +40,7 @@ export default async function handler(req, res) {
       event = stripe.webhooks.constructEvent(
         rawBody.toString(),
         signature,
-        'whsec_c86af51f3ba5dcb0d35cd3d49671f0fa36a4df6b525bb6e32549559607b31089'
+        process.env.STRIPE_WEBHOOK_SECRET
       );
 
       // Evènement construit avec succès
