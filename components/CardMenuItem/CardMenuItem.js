@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
-import styles from './CardMenu.module.css';
+import styles from './CardMenuItem.module.css';
 
-const CardMenu = ({ data }) => {
+const CardMenuItem = ({ data }) => {
   const dispatch = useDispatch();
 
   const addToCart = () => {
@@ -35,4 +35,4 @@ const CardMenu = ({ data }) => {
   );
 };
 
-export default CardMenu;
+export default CardMenuItem;

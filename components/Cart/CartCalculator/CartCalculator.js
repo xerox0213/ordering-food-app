@@ -1,6 +1,6 @@
-import styles from './CalculatorPrice.module.css';
+import styles from './CartCalculator.module.css';
 
-const CalculatorPrice = ({ products, redirectToCheckout }) => {
+const CartCalculator = ({ products, redirectToCheckout }) => {
   return (
     <div className={styles.calculatorPrice}>
       <div className={styles.infoContainer}>
@@ -27,4 +27,4 @@ const CalculatorPrice = ({ products, redirectToCheckout }) => {
   );
 };
 
-export default CalculatorPrice;
+export default CartCalculator;

@@ -1,12 +1,12 @@
-import { useRouter } from 'next/router';
+import styles from '@/styles/Success.module.css';
 
 const Success = () => {
-  const router = useRouter();
-  const { session_id } = router.query;
-  console.log(router.query);
   return (
-    <div className='sectionWithoutCheckout'>
-      <h1>ACHAT EFFECTUE</h1>
+    <div className='section'>
+      <div className={styles.successMsg}>
+        <h1> 🎉 Merci de votre achat ! 🎉</h1>
+        <p>😋 Votre repas est déjà en préparation. Bon appétit ! 🍽️</p>
+      </div>
     </div>
   );
 };

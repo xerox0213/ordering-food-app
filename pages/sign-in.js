@@ -1,10 +1,10 @@
-import Background from '@/components/Background/Background';
-import AuthenticationForm from '@/components/Authentication/AuthenticationForm';
+import BgAuthRegPages from '@/components/BgAuthRegPages/BgAuthRegPages';
+import AuthenticationForm from '@/components/AuthenticationForm/AuthenticationForm';
 
 const SignIn = () => {
   return (
     <>
-      <Background />
+      <BgAuthRegPages />
       <AuthenticationForm />
     </>
   );

@@ -1,7 +1,7 @@
-import styles from './Filter.module.css';
 import Image from 'next/image';
+import styles from './BtnFilterFood.module.css';
 
-const Filter = ({ text, type, search, setSearch }) => {
+const BtnFilterFood = ({ text, type, search, setSearch }) => {
   return (
     <button
       className={
@@ -20,4 +20,4 @@ const Filter = ({ text, type, search, setSearch }) => {
   );
 };
 
-export default Filter;
+export default BtnFilterFood;

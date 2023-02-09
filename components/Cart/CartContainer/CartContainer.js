@@ -1,11 +1,11 @@
 import getStripe from '@/get-stripe';
-import { useSelector } from 'react-redux';
-import styles from './CheckoutContainer.module.css';
-import CheckoutItem from '../CheckoutItem/CheckoutItem';
-import CalculatorPrice from '../CalculatorPrice/CalculatorPrice';
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
+import CartItem from '../CartItem/CartItem';
+import styles from './CartContainer.module.css';
+import CartCalculator from '../CartCalculator/CartCalculator';
 
-const CheckoutContainer = () => {
+const CartContainer = () => {
   const products = useSelector((state) => state.cart);
   const router = useRouter();
   const redirectToCheckout = async () => {
@@ -48,10 +48,10 @@ const CheckoutContainer = () => {
         <>
           <div className={styles.products}>
             {products.map((data) => (
-              <CheckoutItem key={data.id} data={data} />
+              <CartItem key={data.id} data={data} />
             ))}
           </div>
-          <CalculatorPrice
+          <CartCalculator
             redirectToCheckout={redirectToCheckout}
             products={products}
           />
@@ -61,4 +61,4 @@ const CheckoutContainer = () => {
   );
 };
 
-export default CheckoutContainer;
+export default CartContainer;

@@ -1,9 +1,9 @@
-import InfoItem from './InfoItem';
 import { useEffect } from 'react';
-import styles from './InfoModal.module.css';
+import InfoItem from './ActionMsgModalItem';
 import { useSelector, useDispatch } from 'react-redux';
+import styles from './ActionMsgModal.module.css';
 
-const InfoContainer = () => {
+const ActionMsgModalContainer = () => {
   const state = useSelector((state) => state.info);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -25,4 +25,4 @@ const InfoContainer = () => {
   );
 };
 
-export default InfoContainer;
+export default ActionMsgModalContainer;

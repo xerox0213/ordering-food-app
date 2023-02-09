@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import Bg from '@/public/background.jpg';
-import styles from './Background.module.css';
+import styles from './BgAuthRegPages.module.css';
 
-const Background = () => {
+const BgAuthRegPages = () => {
   return <Image className={styles.background} src={Bg} />;
 };
 
-export default Background;
+export default BgAuthRegPages;

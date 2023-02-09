@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
-import styles from './CheckoutItem.module.css';
+import styles from './CartItem.module.css';
 import ContainerQttBtn from '@/components/QuantityButton/ContainerQttBtn/ContainerQttBtn';
 
-const CheckoutItem = ({ data }) => {
+const CartItem = ({ data }) => {
   const dispatch = useDispatch();
 
   const removeProduct = () => {
@@ -32,4 +32,4 @@ const CheckoutItem = ({ data }) => {
   );
 };
 
-export default CheckoutItem;
+export default CartItem;

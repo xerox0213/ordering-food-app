@@ -1,7 +1,7 @@
 import useSignIn from '@/hooks/useSignIn';
-import ErrorForm from '../ErrorForm/ErrorForm';
-import MessageForm from '../MessageForm/MessageForm';
 import styles from './AuthenticationForm.module.css';
+import WarningMsgForm from '../WarningMsgForm/WarningMsgForm';
+import RedirectionMsgForm from '../RedirectionMsgForm/RedirectionMsgForm';
 
 const AuthenticationForm = () => {
   const [errorAuthentication, errorEmail, handleSubmit, loading] = useSignIn();
@@ -10,7 +10,7 @@ const AuthenticationForm = () => {
     <div className={styles.container}>
       <div className={styles.containerForm}>
         <h1>Connectez-vous :</h1>
-        {errorAuthentication && <ErrorForm error={errorAuthentication} />}
+        {errorAuthentication && <WarningMsgForm error={errorAuthentication} />}
         <form onSubmit={handleSubmit}>
           <div className={styles.inputGroup}>
             <label htmlFor='email'>E-mail</label>
@@ -34,7 +34,7 @@ const AuthenticationForm = () => {
           </button>
         </form>
       </div>
-      <MessageForm type='authentication' />
+      <RedirectionMsgForm type='authentication' />
     </div>
   );
 };

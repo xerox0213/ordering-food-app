@@ -1,9 +1,9 @@
-import CheckoutContainer from '@/components/Checkout/CheckoutContainer/CheckoutContainer';
+import CartContainer from '@/components/Cart/CartContainer/CartContainer';
 
 const Cart = () => {
   return (
     <>
-      <CheckoutContainer />
+      <CartContainer />
     </>
   );
 };

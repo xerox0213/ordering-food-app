@@ -1,5 +1,5 @@
-import Loader from '@/components/Loader/Loader';
 import { useQuery } from '@tanstack/react-query';
+import LoaderPage from '@/components/LoaderPage/LoaderPage';
 
 const Profile = () => {
   const { data, isFetching } = useQuery({
@@ -10,7 +10,7 @@ const Profile = () => {
   if (isFetching) {
     return (
       <div className='section'>
-        <Loader />
+        <LoaderPage />
       </div>
     );
   }

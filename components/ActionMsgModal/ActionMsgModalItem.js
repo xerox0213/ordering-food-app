@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
-import styles from './InfoModal.module.css';
+import styles from './ActionMsgModal.module.css';
 
-const InfoItem = ({ msg }) => {
+const ActionMsgModalItem = ({ msg }) => {
   const ref = useRef();
 
   useEffect(() => {
@@ -22,4 +22,4 @@ const InfoItem = ({ msg }) => {
   );
 };
 
-export default InfoItem;
+export default ActionMsgModalItem;

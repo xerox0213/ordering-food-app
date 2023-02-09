@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Loader from '@/components/Loader/Loader';
 import { useQuery } from '@tanstack/react-query';
-import OrderItem from '@/components/ItemOrder/ItemOrder';
+import OrderItem from '@/components/OrderItem/OrderItem';
+import LoaderPage from '@/components/LoaderPage/LoaderPage';
 import ModalOrder from '@/components/ModalOrder/ModalOrder';
 
 const Orders = () => {
@@ -15,7 +15,7 @@ const Orders = () => {
   if (isFetching) {
     return (
       <div className='section'>
-        <Loader />
+        <LoaderPage />
       </div>
     );
   }

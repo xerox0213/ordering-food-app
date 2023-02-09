@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import styles from './MessageForm.module.css';
+import styles from './RedirectionMsgForm.module.css';
 
-const MessageForm = ({ type }) => {
+const RedirectionMsgForm = ({ type }) => {
   if (type === 'registration') {
     return (
       <p className={styles.infoAccount}>
@@ -19,4 +19,4 @@ const MessageForm = ({ type }) => {
   }
 };
 
-export default MessageForm;
+export default RedirectionMsgForm;
