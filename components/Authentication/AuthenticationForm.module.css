@@ -17,11 +17,14 @@
 
 
 .containerForm button {
-  display: block;
+  min-width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0 auto;
   border-radius: 5px;
   padding: 5px 10px;
-  font-size: 16px;
+  font-size: 17px;
   color: white;
   cursor: pointer;
   background-color: #007bff;
@@ -31,7 +34,6 @@
 
 .containerForm button:hover {
   background-color: #026cdd;
-
 }
 
 .inputGroup {

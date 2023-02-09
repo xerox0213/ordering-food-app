@@ -4,7 +4,7 @@ import MessageForm from '../MessageForm/MessageForm';
 import styles from './AuthenticationForm.module.css';
 
 const AuthenticationForm = () => {
-  const [errorAuthentication, errorEmail, handleSubmit] = useSignIn();
+  const [errorAuthentication, errorEmail, handleSubmit, loading] = useSignIn();
   // Rendu
   return (
     <div className={styles.container}>
@@ -29,7 +29,9 @@ const AuthenticationForm = () => {
             <label htmlFor='password'>Mot de passe</label>
             <input type='password' id='password' />
           </div>
-          <button>Connexion</button>
+          <button>
+            {loading ? <div className='loaderBtn'></div> : 'Connexion'}
+          </button>
         </form>
       </div>
       <MessageForm type='authentication' />

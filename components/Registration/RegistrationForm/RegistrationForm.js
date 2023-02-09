@@ -19,6 +19,7 @@ const RegistrationForm = () => {
     refForm,
     nextRegistrationStep,
     prevRegistrationStep,
+    loading,
   ] = useRegister();
 
   // Rendu
@@ -58,7 +59,7 @@ const RegistrationForm = () => {
           )}
           {registrationStep < 2 && (
             <button onClick={nextRegistrationStep} className={styles.nextBtn}>
-              Suivant
+              {loading ? <div className='loaderBtn'></div> : 'Suivant'}
             </button>
           )}
         </div>

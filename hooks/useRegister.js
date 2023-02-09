@@ -4,8 +4,46 @@ const useRegister = () => {
   const [registrationStep, setRegistrationStep] = useState(0);
   const [errorInputs, setErrorInput] = useState([]);
   const [errorRegistration, setErrorRegistration] = useState('');
+  const [loading, setLoading] = useState(false);
   const registrationData = useRef({});
   const refForm = useRef(null);
+
+  useEffect(() => {
+    if (loading) {
+      const postData = async () => {
+        try {
+          locked = true;
+          addData();
+          const requestCreateUserWithDb = await fetch(
+            '/api/user_api/registration',
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(registrationData.current),
+            }
+          );
+          const responseAPI = await requestCreateUserWithDb.json();
+          if (responseAPI.code === 401) {
+            throw new Error(responseAPI.error);
+          }
+          refForm.current.reset();
+          if (errorRegistration !== '') {
+            setErrorRegistration('');
+          }
+          setRegistrationStep(registrationStep + 1);
+        } catch (error) {
+          locked = false;
+          setErrorRegistration(error.message);
+          setLoading(false);
+        }
+      };
+      postData();
+    } else {
+      return;
+    }
+  }, [loading]);
 
   // Interaction
   const addData = () => {
@@ -126,32 +164,7 @@ const useRegister = () => {
         setErrorInput([]);
         setRegistrationStep(registrationStep + 1);
       } else if (registrationStep < 2 && registrationStep === 1 && !locked) {
-        try {
-          locked = true;
-          addData();
-          const requestCreateUserWithDb = await fetch(
-            '/api/user_api/registration',
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(registrationData.current),
-            }
-          );
-          const responseAPI = await requestCreateUserWithDb.json();
-          if (responseAPI.code === 401) {
-            throw new Error(responseAPI.error);
-          }
-          refForm.current.reset();
-          if (errorRegistration !== '') {
-            setErrorRegistration('');
-          }
-          setRegistrationStep(registrationStep + 1);
-        } catch (error) {
-          locked = false;
-          setErrorRegistration(error.message);
-        }
+        setLoading(true);
       } else {
         return;
       }
@@ -181,6 +194,7 @@ const useRegister = () => {
     refForm,
     nextRegistrationStep,
     prevRegistrationStep,
+    loading,
   ];
 };
 

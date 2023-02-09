@@ -1,15 +1,53 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
 const useSignIn = () => {
   // Etat
   const [errorAuthentication, setErrorAuthentication] = useState('');
   const [errorEmail, setErrorEmail] = useState(false);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const { push } = useRouter();
-  // Interaction
+  const authenticationData = useRef();
 
+  useEffect(() => {
+    if (loading) {
+      const postData = async () => {
+        try {
+          locked = true;
+          const request = await fetch('/api/user_api/sign-in', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email: email.value,
+              password: password.value,
+            }),
+          });
+          const response = await request.json();
+          if (response.code === 401) {
+            throw new Error(response.message);
+          }
+          setErrorEmail('');
+          setErrorAuthentication('');
+          dispatch({ type: 'info/addMessage', payload: 'Connecté ✔️' });
+          push('/menu');
+        } catch (error) {
+          locked = false;
+          setErrorAuthentication(error.message);
+          setLoading(false);
+        }
+      };
+      postData();
+    } else {
+      return;
+    }
+  }, [loading]);
+
+  // Interaction
+  let locked = false;
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -22,24 +60,11 @@ const useSignIn = () => {
       return;
     }
     setErrorEmail(false);
-    try {
-      const request = await fetch('/api/user_api/sign-in', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email: email.value, password: password.value }),
-      });
-      const response = await request.json();
-      if (response.code === 401) {
-        throw new Error(response.message);
-      }
-      setErrorEmail('');
-      setErrorAuthentication('');
-      push('/menu');
-      dispatch({ type: 'info/addMessage', payload: 'Connecté ✔️' });
-    } catch (error) {
-      setErrorAuthentication(error.message);
+    authenticationData.current = { email, password };
+    if (!locked) {
+      setLoading(true);
+    } else {
+      return;
     }
   };
 
@@ -49,7 +74,7 @@ const useSignIn = () => {
     return regex.test(value);
   };
 
-  return [errorAuthentication, errorEmail, handleSubmit];
+  return [errorAuthentication, errorEmail, handleSubmit, loading];
 };
 
 export default useSignIn;
