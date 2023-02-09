@@ -41,7 +41,7 @@ const RegistrationForm = () => {
       </div>
       <div className={styles.containerForm}>
         {errorRegistration && <ErrorForm error={errorRegistration} />}
-        <h1>Inscrivez-vous :</h1>
+        {registrationStep < 2 && <h1>Inscrivez-vous :</h1>}
         <form ref={refForm}>
           <RegistrationInputs
             registrationStep={registrationStep}

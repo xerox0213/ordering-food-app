@@ -1,12 +1,12 @@
 import cookie from 'cookie';
 
 export default async function handler(req, res) {
-  if (req.method === 'POST') {
-    try {
-      const uid = req.cookies.token;
+  try {
+    if (req.method === 'POST') {
+      // Supression du cookie token en l'expirant
       res.setHeader(
         'Set-Cookie',
-        cookie.serialize('token', uid, {
+        cookie.serialize('token', '', {
           httpOnly: true,
           secure: process.env.NODE_ENV !== 'development',
           maxAge: 0,
@@ -15,10 +15,8 @@ export default async function handler(req, res) {
         })
       );
       res.status(200).json({ code: 200 });
-    } catch (error) {
-      res.status(500).json({ code: 500, message: error.message });
     }
-  } else {
-    return;
+  } catch (error) {
+    res.status(401).json(error);
   }
 }

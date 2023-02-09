@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 const useRegister = () => {
   const [registrationStep, setRegistrationStep] = useState(0);
@@ -115,6 +115,8 @@ const useRegister = () => {
     }
   };
 
+  let locked = false;
+
   const nextRegistrationStep = async () => {
     const validityInputs = checkInputs();
     if (validityInputs.validity) {
@@ -122,9 +124,10 @@ const useRegister = () => {
         addData();
         refForm.current.reset();
         setErrorInput([]);
-        setRegistrationStep((currentStep) => currentStep + 1);
-      } else if (registrationStep < 2 && registrationStep === 1) {
+        setRegistrationStep(registrationStep + 1);
+      } else if (registrationStep < 2 && registrationStep === 1 && !locked) {
         try {
+          locked = true;
           addData();
           const requestCreateUserWithDb = await fetch(
             '/api/user_api/registration',
@@ -144,12 +147,13 @@ const useRegister = () => {
           if (errorRegistration !== '') {
             setErrorRegistration('');
           }
-          setRegistrationStep((currentStep) => currentStep + 1);
+          setRegistrationStep(registrationStep + 1);
         } catch (error) {
+          locked = false;
           setErrorRegistration(error.message);
         }
       } else {
-        setRegistrationStep(2);
+        return;
       }
     } else {
       setErrorInput(validityInputs.newErrorInputs);
