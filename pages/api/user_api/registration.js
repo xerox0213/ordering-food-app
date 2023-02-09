@@ -30,8 +30,7 @@ export default async function handler(req, res) {
     if (error.code === 'auth/email-already-in-use') {
       res.status(401).json({
         code: 401,
-        error:
-          "L'adresse email indiqué est déjà utilisée. Veuillez en saisir une autre ou vous connectez à votre compte.",
+        error: "L'email indiqué est déjà utilisée ⚠️",
       });
     }
   }

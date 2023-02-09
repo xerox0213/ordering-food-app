@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import OrderItem from '@/components/OrderItem/OrderItem';
+import OrderItem from '@/components/OrderComponents/OrderItem/OrderItem';
+import OrderModal from '@/components/OrderComponents/OrderModal/OderModal';
 import LoaderPage from '@/components/LoaderPage/LoaderPage';
-import ModalOrder from '@/components/ModalOrder/ModalOrder';
 
 const Orders = () => {
   const [visibiliyModal, setVisibilityModal] = useState(false);
@@ -38,7 +38,7 @@ const Orders = () => {
             })}
           </div>
           {visibiliyModal && (
-            <ModalOrder
+            <OrderModal
               currentOrderData={currentOrderData}
               setVisibilityModal={setVisibilityModal}
               setCurrentOrderData={setCurrentOrderData}

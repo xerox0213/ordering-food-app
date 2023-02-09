@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import CardMenu from '../CardMenuItem/CardMenuItem';
-import Loader from '../LoaderPage/LoaderPage';
+import Loader from '../../LoaderPage/LoaderPage';
 import { useQuery } from '@tanstack/react-query';
 import styles from './CardMenuContainer.module.css';
-import BtnFilterFood from '../BtnFilterFood/BtnFilterFood';
+import BtnFilterFood from '../../BtnFilterFood/BtnFilterFood';
 
 const CardMenuContainer = () => {
   const [search, setSearch] = useState('allFoods');

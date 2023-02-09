@@ -1,4 +1,4 @@
-import CardMenuContainer from '@/components/CardMenuContainer/CardMenuContainer';
+import CardMenuContainer from '@/components/CardMenu/CardMenuContainer/CardMenuContainer';
 
 const Menu = () => {
   // Rendu

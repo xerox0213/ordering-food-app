@@ -1,12 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 const useRegister = () => {
   const [registrationStep, setRegistrationStep] = useState(0);
   const [errorInputs, setErrorInput] = useState([]);
-  const [errorRegistration, setErrorRegistration] = useState('');
   const [loading, setLoading] = useState(false);
   const registrationData = useRef({});
   const refForm = useRef(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (loading) {
@@ -29,13 +30,13 @@ const useRegister = () => {
             throw new Error(responseAPI.error);
           }
           refForm.current.reset();
-          if (errorRegistration !== '') {
-            setErrorRegistration('');
-          }
           setRegistrationStep(registrationStep + 1);
         } catch (error) {
           locked = false;
-          setErrorRegistration(error.message);
+          dispatch({
+            type: 'info/addMessage',
+            payload: error.message,
+          });
           setLoading(false);
         }
       };
@@ -164,6 +165,7 @@ const useRegister = () => {
         setErrorInput([]);
         setRegistrationStep(registrationStep + 1);
       } else if (registrationStep < 2 && registrationStep === 1 && !locked) {
+        setErrorInput([]);
         setLoading(true);
       } else {
         return;
@@ -177,9 +179,6 @@ const useRegister = () => {
   const prevRegistrationStep = () => {
     if (registrationStep > 0) {
       refForm.current.reset();
-      if (errorRegistration !== '') {
-        setErrorRegistration('');
-      }
       setRegistrationStep((currentStep) => currentStep - 1);
     } else {
       return;
@@ -189,7 +188,6 @@ const useRegister = () => {
   return [
     registrationStep,
     errorInputs,
-    errorRegistration,
     registrationData,
     refForm,
     nextRegistrationStep,

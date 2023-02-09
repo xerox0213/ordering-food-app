@@ -19,11 +19,11 @@ export default async function handler(req, res) {
     res.status(200).json({ code: 200 });
   } catch (error) {
     if (error.code === 'auth/user-not-found') {
-      res.status(401).json({ code: 401, message: 'Email invalide !' });
+      res.status(401).json({ code: 401, message: 'Email invalide ❌' });
     } else if (error.code === 'auth/wrong-password') {
       res.status(401).json({
         code: 401,
-        message: 'Mot de passe invalide ! Vérifiez le mot de passe.',
+        message: 'Vérifier votre mot de passe ❌ ',
       });
     } else {
       res.status(401).json(error);

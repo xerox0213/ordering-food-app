@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 
 const useSignIn = () => {
   // Etat
-  const [errorAuthentication, setErrorAuthentication] = useState('');
   const [errorEmail, setErrorEmail] = useState(false);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -31,12 +30,14 @@ const useSignIn = () => {
             throw new Error(response.message);
           }
           setErrorEmail('');
-          setErrorAuthentication('');
           dispatch({ type: 'info/addMessage', payload: 'Connecté ✔️' });
           push('/menu');
         } catch (error) {
           locked = false;
-          setErrorAuthentication(error.message);
+          dispatch({
+            type: 'info/addMessage',
+            payload: error.message,
+          });
           setLoading(false);
         }
       };
@@ -74,7 +75,7 @@ const useSignIn = () => {
     return regex.test(value);
   };
 
-  return [errorAuthentication, errorEmail, handleSubmit, loading];
+  return [errorEmail, handleSubmit, loading];
 };
 
 export default useSignIn;

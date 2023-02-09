@@ -1,11 +1,11 @@
-import styles from './MordalOrder.module.css';
 import { IoMdClose } from 'react-icons/io';
-const ModalOrder = ({
+import styles from './OrderModal.module.css';
+
+const OrderModal = ({
   setVisibilityModal,
   currentOrderData,
   setCurrentOrderData,
 }) => {
-  console.log(currentOrderData);
   return (
     <div className={styles.modalContainer}>
       <div
@@ -71,4 +71,4 @@ const ModalOrder = ({
   );
 };
 
-export default ModalOrder;
+export default OrderModal;

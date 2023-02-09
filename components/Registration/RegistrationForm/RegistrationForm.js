@@ -5,7 +5,6 @@ import Point2 from '@/public/fast-food.png';
 import Point3 from '@/public/nourriture.png';
 import useRegister from '@/hooks/useRegister';
 import styles from './RegistrationForm.module.css';
-import WarningMsgForm from '@/components/WarningMsgForm/WarningMsgForm';
 import RegistrationInputs from '../RegistrationInputs/RegistrationInputs';
 import RedirectionMsgForm from '@/components/RedirectionMsgForm/RedirectionMsgForm';
 
@@ -14,7 +13,6 @@ const RegistrationForm = () => {
   const [
     registrationStep,
     errorInputs,
-    errorRegistration,
     registrationData,
     refForm,
     nextRegistrationStep,
@@ -41,8 +39,7 @@ const RegistrationForm = () => {
         </div>
       </div>
       <div className={styles.containerForm}>
-        {errorRegistration && <WarningMsgForm error={errorRegistration} />}
-        {registrationStep < 2 && <h1>Inscrivez-vous :</h1>}
+        {registrationStep === 0 && <h1>Inscrivez-vous :</h1>}
         <form ref={refForm}>
           <RegistrationInputs
             registrationStep={registrationStep}
