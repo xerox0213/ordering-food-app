@@ -32,6 +32,11 @@ export default async function handler(req, res) {
         code: 401,
         error: "L'email indiqué est déjà utilisée ⚠️",
       });
+    } else {
+      res.status(401).json({
+        code: 401,
+        error: "Une erreur s'est produite, réessayer dans quelques minutes ❌",
+      });
     }
   }
 }

@@ -1,16 +1,24 @@
-import { useQuery } from '@tanstack/react-query';
+import useFetch from '@/hooks/useFetch';
 import LoaderPage from '@/components/LoaderPage/LoaderPage';
 
 const Profile = () => {
-  const { data, isFetching } = useQuery({
-    queryKey: ['userData'],
-    queryFn: () => fetch('/api/profile_api').then((res) => res.json()),
-  });
+  const [data, isFetching, isError] = useFetch(['userData'], 'profile_api');
 
   if (isFetching) {
     return (
       <div className='section'>
         <LoaderPage />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className='section'>
+        <h1>
+          Wops, une erreur s'est produite il semblerait que vous n'êtes plus
+          connecté.
+        </h1>
       </div>
     );
   }
@@ -36,7 +44,7 @@ const Profile = () => {
           <p>{data.city}</p>
         </div>
         <div className='group'>
-          <h4>Code postale</h4>
+          <h4>Code postal</h4>
           <p>{data.zip}</p>
         </div>
       </div>

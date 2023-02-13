@@ -52,7 +52,8 @@
     min-width: none;
     width: 100%;
     z-index: 1000;
-    column-gap: 50px;
+    column-gap: 20px;
+    row-gap: 0px;
     border-right: none;
     border-top: 1px solid lightgray;
     padding: 0px;

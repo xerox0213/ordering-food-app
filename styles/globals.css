@@ -43,6 +43,8 @@ main {
 
 .section h1 {
   margin-bottom: 20px;
+  width: 70%;
+  font-size: clamp(20px, 3vw, 27px);
 }
 
 .loaderBtn {

@@ -1,21 +1,32 @@
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import useFetch from '@/hooks/useFetch';
+import LoaderPage from '@/components/LoaderPage/LoaderPage';
 import OrderItem from '@/components/OrderComponents/OrderItem/OrderItem';
 import OrderModal from '@/components/OrderComponents/OrderModal/OderModal';
-import LoaderPage from '@/components/LoaderPage/LoaderPage';
 
 const Orders = () => {
   const [visibiliyModal, setVisibilityModal] = useState(false);
   const [currentOrderData, setCurrentOrderData] = useState(null);
-  const { isFetching, data } = useQuery({
-    queryKey: ['orders'],
-    queryFn: () => fetch('/api/orders_api/getOrders').then((res) => res.json()),
-  });
+  const [data, isFetching, isError] = useFetch(
+    ['orders'],
+    'orders_api/getOrders'
+  );
 
   if (isFetching) {
     return (
       <div className='section'>
         <LoaderPage />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className='section'>
+        <h1>
+          Wops, une erreur s'est produite il semblerait que vous n'êtes plus
+          connecté.
+        </h1>
       </div>
     );
   }

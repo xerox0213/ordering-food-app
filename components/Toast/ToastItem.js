@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import styles from './ActionMsgModal.module.css';
+import styles from './Toast.module.css';
 
 const ActionMsgModalItem = ({ msg }) => {
   const ref = useRef();

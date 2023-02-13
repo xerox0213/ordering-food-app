@@ -166,9 +166,9 @@ const RegistrationInputs = ({
   } else {
     return (
       <>
-        <h1 className={styles.titleRegistration}>
+        <h2 className={styles.titleRegistration}>
           🎉 Super, vous êtes inscrit(e) ! 🍽️
-        </h1>
+        </h2>
         <p className={styles.infoRegistration}>
           Vous pouvez commander dès mainteant chez Delivenas.
         </p>

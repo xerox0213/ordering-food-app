@@ -1,22 +1,29 @@
 import { useState } from 'react';
-import CardMenu from '../CardMenuItem/CardMenuItem';
+import useFetch from '@/hooks/useFetch';
 import Loader from '../../LoaderPage/LoaderPage';
-import { useQuery } from '@tanstack/react-query';
+import CardMenu from '../CardMenuItem/CardMenuItem';
 import styles from './CardMenuContainer.module.css';
 import BtnFilterFood from '../../BtnFilterFood/BtnFilterFood';
 
 const CardMenuContainer = () => {
   const [search, setSearch] = useState('allFoods');
-  const { data, isFetching } = useQuery({
-    queryKey: [search],
-    queryFn: () =>
-      fetch(`/api/food_api?type=${search}`).then((res) => res.json()),
-  });
+  const [data, isFetching, isError] = useFetch(
+    [search],
+    `food_api?type=${search}`
+  );
 
   if (isFetching) {
     return (
       <div className='grid'>
         <Loader />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className='section'>
+        <h1>Une erreur s'est produite</h1>
       </div>
     );
   }

@@ -1,6 +1,7 @@
-import { auth } from '@/firebase-config';
 import cookie from 'cookie';
+import { auth } from '@/firebase-config';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+
 export default async function handler(req, res) {
   try {
     const { email, password } = req.body;
@@ -26,7 +27,11 @@ export default async function handler(req, res) {
         message: 'Vérifier votre mot de passe ❌ ',
       });
     } else {
-      res.status(401).json(error);
+      res.status(401).json({
+        code: 401,
+        message:
+          "Une erreur s'est produite, réessayer dans quelques minutes ❌",
+      });
     }
   }
 }

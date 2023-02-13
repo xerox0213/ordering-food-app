@@ -6,15 +6,18 @@
   grid-template-rows: auto auto;
   grid-auto-rows: auto;
   gap: 20px;
-  flex-wrap: wrap;
 }
 
 .filterContainer {
   display: flex;
   flex-wrap: wrap;
-  column-gap: 20px;
+  column-gap: 10px;
   grid-column: 1/-1;
   grid-row: 1/2;
+  row-gap: 10px;
+  /* On laisse un peu de place  */
+  padding-right: 35px;
+
 }
 
 @media screen and (max-width:820px) {

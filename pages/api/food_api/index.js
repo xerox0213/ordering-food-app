@@ -2,9 +2,13 @@ import path from 'path';
 import { readFileSync } from 'fs';
 
 export default function handler(req, res) {
-  const { type } = req.query;
-  const foodData = getFoodData(type);
-  res.status(200).json(foodData);
+  try {
+    const { type } = req.query;
+    const foodData = getFoodData(type);
+    res.status(200).json(foodData);
+  } catch (error) {
+    res.status(401).json({ code: 401, message: error.message });
+  }
 }
 
 function getFoodData(type) {

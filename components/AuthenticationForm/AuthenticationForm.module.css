@@ -1,6 +1,7 @@
 .container {
   max-width: 800px;
   margin: 50px auto;
+  padding: 0 25px;
 }
 
 .containerForm {
@@ -13,8 +14,8 @@
 
 .containerForm h1 {
   margin-bottom: 20px;
+  font-size: clamp(22px, 6vw, 30px);
 }
-
 
 .containerForm button {
   min-width: 100px;
@@ -24,7 +25,7 @@
   margin: 0 auto;
   border-radius: 5px;
   padding: 5px 10px;
-  font-size: 17px;
+  font-size: clamp(14px, 2.4vw, 17px);
   color: white;
   cursor: pointer;
   background-color: #007bff;
@@ -45,7 +46,7 @@
 
 .inputGroup label {
   font-weight: 500;
-  font-size: 16px;
+  font-size: clamp(14px, 3.2vw, 16px);
 }
 
 .inputGroup input {

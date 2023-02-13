@@ -1,7 +1,7 @@
 .cartLink {
   position: absolute;
   top: 20px;
-  right: 50px;
+  right: 10px;
   z-index: 1000;
   display: flex;
   align-items: baseline;
