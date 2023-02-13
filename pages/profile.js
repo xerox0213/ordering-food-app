@@ -1,24 +1,12 @@
 import useFetch from '@/hooks/useFetch';
 import LoaderPage from '@/components/LoaderPage/LoaderPage';
+import { getDataOfUser } from './api/profile_api';
 
-const Profile = () => {
-  const [data, isFetching, isError] = useFetch(['userData'], 'profile_api');
-
-  if (isFetching) {
-    return (
-      <div className='section'>
-        <LoaderPage />
-      </div>
-    );
-  }
-
+const Profile = ({ profile: data, error: isError }) => {
   if (isError) {
     return (
       <div className='section'>
-        <h1>
-          Wops, une erreur s'est produite il semblerait que vous n'êtes plus
-          connecté.
-        </h1>
+        <h1>Wops il semblerait qu'il y a eu une erreur</h1>
       </div>
     );
   }
@@ -53,3 +41,32 @@ const Profile = () => {
 };
 
 export default Profile;
+
+export async function getServerSideProps(context) {
+  const token = context.req.cookies.token;
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/sign-in',
+      },
+    };
+  }
+
+  try {
+    const profile = await getDataOfUser(token);
+    return {
+      props: {
+        profile,
+        error: false,
+      },
+    };
+  } catch (error) {
+    return {
+      props: {
+        profile: {},
+        error: true,
+      },
+    };
+  }
+}

@@ -21,3 +21,14 @@ export default async function handler(req, res) {
     res.status(401).json({ code: 401, message: error.message });
   }
 }
+
+export async function getDataOfUser(uid) {
+  try {
+    const docRef = doc(db, 'user', uid);
+    const docSnap = await getDoc(docRef);
+    const userData = docSnap.data();
+    return userData;
+  } catch (error) {
+    return new Promise.reject(new Error("Une erreur s'est produite"));
+  }
+}

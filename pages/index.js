@@ -9,3 +9,19 @@ export default function Home() {
     </>
   );
 }
+
+export async function getServerSideProps(context) {
+  const token = context.req.cookies.token;
+
+  if (token) {
+    return {
+      redirect: {
+        destination: '/menu',
+      },
+    };
+  } else {
+    return {
+      props: {},
+    };
+  }
+}

@@ -1,35 +1,20 @@
 import { useState } from 'react';
-import useFetch from '@/hooks/useFetch';
-import LoaderPage from '@/components/LoaderPage/LoaderPage';
+import { getOrders } from './api/orders_api';
 import OrderItem from '@/components/OrderComponents/OrderItem/OrderItem';
 import OrderModal from '@/components/OrderComponents/OrderModal/OderModal';
 
-const Orders = () => {
+const Orders = ({ orders: data, error: isError }) => {
   const [visibiliyModal, setVisibilityModal] = useState(false);
   const [currentOrderData, setCurrentOrderData] = useState(null);
-  const [data, isFetching, isError] = useFetch(
-    ['orders'],
-    'orders_api/getOrders'
-  );
-
-  if (isFetching) {
-    return (
-      <div className='section'>
-        <LoaderPage />
-      </div>
-    );
-  }
 
   if (isError) {
     return (
       <div className='section'>
-        <h1>
-          Wops, une erreur s'est produite il semblerait que vous n'êtes plus
-          connecté.
-        </h1>
+        <h1>Wops il semblerait qu'il y a eu une erreur</h1>
       </div>
     );
   }
+
   return (
     <div className='section'>
       {data.length === 0 ? (
@@ -62,3 +47,32 @@ const Orders = () => {
 };
 
 export default Orders;
+
+export async function getServerSideProps(context) {
+  const token = context.req.cookies.token;
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/sign-in',
+      },
+    };
+  }
+
+  try {
+    const orders = await getOrders(token);
+    return {
+      props: {
+        orders,
+        error: false,
+      },
+    };
+  } catch (error) {
+    return {
+      props: {
+        orders: [],
+        error: true,
+      },
+    };
+  }
+}
