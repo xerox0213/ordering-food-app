@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 const Navbar = () => {
   const { asPath, push } = useRouter();
   const dispatch = useDispatch();
+  let lockedBtn = false;
   return (
     <nav className={styles.navbar}>
       <Link
@@ -36,10 +37,29 @@ const Navbar = () => {
 
       <button
         onClick={async () => {
-          await fetch('/api/user_api/log-out', { method: 'POST' });
-          dispatch({ type: 'info/addMessage', payload: 'Déconnecté ❌' });
-          dispatch({ type: 'cart/clearCart', payload: [] });
-          push('/sign-in');
+          if (!lockedBtn) {
+            lockedBtn = true;
+            try {
+              const request = await fetch('/api/user_api/log-out', {
+                method: 'POST',
+              });
+              const response = await request.json();
+              if (response.code === 401) {
+                throw new Error(response.message);
+              }
+              dispatch({ type: 'info/addMessage', payload: 'Déconnecté ❌' });
+              dispatch({ type: 'cart/clearCart', payload: [] });
+              push('/sign-in');
+            } catch (error) {
+              lockedBtn = false;
+              dispatch({
+                type: 'info/addMessage',
+                payload: error.message,
+              });
+            }
+          } else {
+            return;
+          }
         }}
       >
         <MdOutlineLogout />

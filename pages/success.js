@@ -12,7 +12,7 @@ const Success = () => {
   return (
     <div className='section'>
       <div className={styles.successMsg}>
-        <h1> 🎉 Merci de votre achat ! 🎉</h1>
+        <h1 style={{ width: '100%' }}> 🎉 Merci de votre achat ! 🎉</h1>
         <p>😋 Votre repas est déjà en préparation. Bon appétit ! 🍽️</p>
       </div>
     </div>
