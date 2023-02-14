@@ -1,5 +1,6 @@
 import useFetch from '@/hooks/useFetch';
 import LoaderPage from '@/components/LoaderPage/LoaderPage';
+import NoCache from '@/components/NoCache/NoCache';
 
 const Profile = () => {
   const [data, isFetching, isError] = useFetch(['userData'], 'profile_api');
@@ -25,6 +26,7 @@ const Profile = () => {
 
   return (
     <>
+      <NoCache />
       <div className='section'>
         <h1>Vos informations :</h1>
         <div className='group'>

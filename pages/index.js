@@ -4,6 +4,7 @@ import RegistrationForm from '@/components/Registration/RegistrationForm/Registr
 export default function Home() {
   return (
     <>
+      <NoCache />
       <BgAuthRegPages />
       <RegistrationForm />
     </>

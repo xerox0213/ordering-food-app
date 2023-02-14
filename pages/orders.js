@@ -3,6 +3,7 @@ import useFetch from '@/hooks/useFetch';
 import LoaderPage from '@/components/LoaderPage/LoaderPage';
 import OrderItem from '@/components/OrderComponents/OrderItem/OrderItem';
 import OrderModal from '@/components/OrderComponents/OrderModal/OderModal';
+import NoCache from '@/components/NoCache/NoCache';
 
 const Orders = () => {
   const [visibiliyModal, setVisibilityModal] = useState(false);
@@ -31,33 +32,36 @@ const Orders = () => {
     );
   }
   return (
-    <div className='section'>
-      {data.length === 0 ? (
-        <h1>Vous n'avez encore jamais passé de commande pour le moment</h1>
-      ) : (
-        <>
-          <h1>Mes commandes :</h1>
-          <div>
-            {data.map((orderData) => {
-              return (
-                <OrderItem
-                  orderData={orderData}
-                  setCurrentOrderData={setCurrentOrderData}
-                  setVisibilityModal={setVisibilityModal}
-                />
-              );
-            })}
-          </div>
-          {visibiliyModal && (
-            <OrderModal
-              currentOrderData={currentOrderData}
-              setVisibilityModal={setVisibilityModal}
-              setCurrentOrderData={setCurrentOrderData}
-            />
-          )}
-        </>
-      )}
-    </div>
+    <>
+      <NoCache />
+      <div className='section'>
+        {data.length === 0 ? (
+          <h1>Vous n'avez encore jamais passé de commande pour le moment</h1>
+        ) : (
+          <>
+            <h1>Mes commandes :</h1>
+            <div>
+              {data.map((orderData) => {
+                return (
+                  <OrderItem
+                    orderData={orderData}
+                    setCurrentOrderData={setCurrentOrderData}
+                    setVisibilityModal={setVisibilityModal}
+                  />
+                );
+              })}
+            </div>
+            {visibiliyModal && (
+              <OrderModal
+                currentOrderData={currentOrderData}
+                setVisibilityModal={setVisibilityModal}
+                setCurrentOrderData={setCurrentOrderData}
+              />
+            )}
+          </>
+        )}
+      </div>
+    </>
   );
 };
 
